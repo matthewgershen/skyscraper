@@ -28,7 +28,10 @@ Canvas for game art
 
 ### Timeline
 
-Day 1: Set up framework, get
+Day 1: Set up framework
+
 Day 2: Create block objects, swinging, falling
+
 Day 3: Crumble away logic/high scores
-Day 4: Polish/Bonus 
+
+Day 4: Polish/Bonus
