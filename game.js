@@ -1,13 +1,15 @@
 const Block = require("./block");
 
 class Game {
-  constructor() {
+  constructor(canvas, ctx) {
+    this.initialBlockHeight = 50;
+    this.initialBlockWidth = 300;
     let baseColorValue = Math.floor(Math.random() * 361);
     const bl = new Block (
-      {x: 282, y: 526, width: 300, height: 50, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
+      {x: 282, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
     );
     const sw = new Block (
-      {x: 282, y: 80, width: 300, height: 50, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: 1, dy: 0 }
+      {x: 282, y: 80, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: 1, dy: 0 }
     );
     this.baseBlocks = [bl];
     this.swingingBlock = sw;
@@ -15,6 +17,8 @@ class Game {
     this.collision = false;
     this.score = 0;
     this.gameOver = false;
+    this.canvas = canvas;
+    this.ctx = ctx;
     this.addSwingingBlock = this.addSwingingBlock.bind(this);
     this.keyDownHandler = this.keyDownHandler.bind(this);
     this.collisionCheck = this.collisionCheck.bind(this);
@@ -30,7 +34,7 @@ class Game {
       x: 282,
       y: 80,
       width: lastWidth,
-      height: 50,
+      height: this.initialBlockHeight,
       color: "hsla(" + `${newColor}` + ", 73%, 50%, 1)",
       dx: 1,
       dy: 0
@@ -61,20 +65,20 @@ class Game {
   }
 
 
-  gameOverResize(canvas){
-    const newHeight = 50 * ((canvas.height/(this.score * 50)) * .75);
-    const yAdj = (this.baseBlocks[0].y - (canvas.height - 50));
+  gameOverResize(){
+    const newHeight = this.initialBlockHeight * ((this.canvas.height/(this.score * this.initialBlockHeight)) * 0.75);
+    const yAdj = (this.baseBlocks[0].y - (this.canvas.height - this.initialBlockHeight));
     this.baseBlocks.forEach((bl,idx)=>{
       bl.height = newHeight;
-      bl.y = bl.y - yAdj + ((50 - newHeight)*(idx+1));
+      bl.y = bl.y - yAdj + ((this.initialBlockHeight - newHeight)*(idx+1));
     });
   }
 
-  draw(ctx, canvas, myVar){
+  draw(myVar){
     this.gameOverCheck();
     if (this.gameOver) {
       if (this.score > 5) {
-        this.gameOverResize(canvas);
+        this.gameOverResize();
       }
       clearInterval(myVar);
     }
@@ -90,18 +94,18 @@ class Game {
       this.addSwingingBlock();
     }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.baseBlocks.forEach((bl)=>{
-      if (this.baseBlocks[this.baseBlocks.length-1].y < 300) {
+      if (this.baseBlocks[this.baseBlocks.length-1].y < this.canvas.height * 0.6) {
         bl.y += .15;
-        bl.draw(ctx);
+        bl.draw(this.ctx);
       } else {
-        bl.draw(ctx);
+        bl.draw(this.ctx);
       }
     });
-    this.swingingBlock.draw(ctx);
+    this.swingingBlock.draw(this.ctx);
 
-    if(this.swingingBlock.x + this.swingingBlock.dx > canvas.width-300 || this.swingingBlock.x + this.swingingBlock.dx < 0) {
+    if(this.swingingBlock.x + this.swingingBlock.dx > this.canvas.width-this.swingingBlock.width || this.swingingBlock.x + this.swingingBlock.dx < 0) {
        this.swingingBlock.dx = -this.swingingBlock.dx;
      }
 
