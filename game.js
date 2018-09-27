@@ -4,12 +4,13 @@ class Game {
   constructor(canvas, ctx) {
     this.initialBlockHeight = 50;
     this.initialBlockWidth = 300;
+    this.swingSpeed = 1.5;
     let baseColorValue = Math.floor(Math.random() * 361);
     const bl = new Block (
       {x: 282, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
     );
     const sw = new Block (
-      {x: 282, y: 80, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: 1, dy: 0 }
+      {x: 282, y: 80, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: this.swingSpeed, dy: 0 }
     );
     this.baseBlocks = [bl];
     this.swingingBlock = sw;
@@ -36,7 +37,7 @@ class Game {
       width: lastWidth,
       height: this.initialBlockHeight,
       color: "hsla(" + `${newColor}` + ", 73%, 50%, 1)",
-      dx: 1,
+      dx: this.swingSpeed,
       dy: 0
     });
   }
@@ -80,8 +81,10 @@ class Game {
       if (this.score > 5) {
         this.gameOverResize();
       }
+      this.swingingBlock.color = "hsla(0, 0%, 0%, 0)";
       clearInterval(myVar);
     }
+
 
     this.collisionCheck();
     if (this.collision) {
@@ -111,11 +114,22 @@ class Game {
 
    if (this.drop) {
      this.swingingBlock.dx = this.swingingBlock.dx*0.997;
-     this.swingingBlock.dy = 1;
+     this.swingingBlock.dy = 2;
    }
 
    this.swingingBlock.x += this.swingingBlock.dx;
    this.swingingBlock.y += this.swingingBlock.dy;
+
+   this.ctx.font = "18px Arial";
+   this.ctx.fillStyle = "black";
+   this.ctx.fillText("Score: " + this.score, 20, 30);
+
+   if (this.gameOver) {
+     this.ctx.font = "30px Arial";
+     this.ctx.fillStyle = "red";
+     this.ctx.textAlign = "center";
+     this.ctx.fillText("Game Over", this.canvas.width/2, 40);
+   }
 
   }
 

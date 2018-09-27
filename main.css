@@ -1,6 +1,11 @@
 canvas {
   background: #eee;
   display: block;
-  margin: 150px auto;
+  margin: auto;
 
+}
+
+h1 {
+  text-align: center;
+  margin: 100px 0 25px 0;
 }
