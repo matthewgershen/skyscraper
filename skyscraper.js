@@ -9,6 +9,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const game = new Game();
 
   document.addEventListener("keydown", game.keyDownHandler, false)
-  setInterval(() => game.draw(ctx,canvas), 5);
-
+  var myVar = setInterval(() => game.draw(ctx,canvas,myVar), 5);
 });

@@ -14,9 +14,12 @@ class Game {
     this.drop = false;
     this.collision = false;
     this.score = 0;
+    this.gameOver = false;
     this.addSwingingBlock = this.addSwingingBlock.bind(this);
     this.keyDownHandler = this.keyDownHandler.bind(this);
     this.collisionCheck = this.collisionCheck.bind(this);
+    this.gameOverCheck = this.gameOverCheck.bind(this);
+    this.gameOverResize = this.gameOverResize.bind(this);
   }
 
   addSwingingBlock() {
@@ -49,7 +52,33 @@ class Game {
     }
   }
 
-  draw(ctx, canvas){
+  gameOverCheck(){
+    let bottom = this.swingingBlock.y + this.swingingBlock.height;
+    let top = this.baseBlocks[this.baseBlocks.length - 1].y + 2;
+    if (bottom > top) {
+      this.gameOver = true;
+    }
+  }
+
+
+  gameOverResize(canvas){
+    const newHeight = 50 * ((canvas.height/(this.score * 50)) * .75);
+    const yAdj = (this.baseBlocks[0].y - (canvas.height - 50));
+    this.baseBlocks.forEach((bl,idx)=>{
+      bl.height = newHeight;
+      bl.y = bl.y - yAdj + ((50 - newHeight)*(idx+1));
+    });
+  }
+
+  draw(ctx, canvas, myVar){
+    this.gameOverCheck();
+    if (this.gameOver) {
+      if (this.score > 5) {
+        this.gameOverResize(canvas);
+      }
+      clearInterval(myVar);
+    }
+
     this.collisionCheck();
     if (this.collision) {
       this.score += 1;
