@@ -2,11 +2,12 @@ const Block = require("./block");
 
 class Game {
   constructor() {
+    let baseColorValue = Math.floor(Math.random() * 361);
     const bl = new Block (
-      {x: 282, y: 526, width: 300, height: 50, color:"#FF0000", dx: 0, dy: 0 }
+      {x: 282, y: 526, width: 300, height: 50, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
     );
     const sw = new Block (
-      {x: 282, y: 80, width: 300, height: 50, color:"#0000FF", dx: 1, dy: 0 }
+      {x: 282, y: 80, width: 300, height: 50, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: 1, dy: 0 }
     );
     this.baseBlocks = [bl];
     this.swingingBlock = sw;
@@ -19,13 +20,15 @@ class Game {
   }
 
   addSwingingBlock() {
+    let newColor = this.swingingBlock.incrementColor();
+    let lastWidth = this.swingingBlock.width
     this.baseBlocks.push(this.swingingBlock);
     this.swingingBlock = new Block({
       x: 282,
       y: 80,
-      width: 300,
+      width: lastWidth,
       height: 50,
-      color:"#0000FF",
+      color: "hsla(" + `${newColor}` + ", 73%, 50%, 1)",
       dx: 1,
       dy: 0
     });
@@ -48,13 +51,13 @@ class Game {
 
   draw(ctx, canvas){
     this.collisionCheck();
-
     if (this.collision) {
       this.score += 1;
       this.drop = false;
       this.swingingBlock.dx = 0;
       this.swingingBlock.dy = 0;
       this.collision = false;
+      this.swingingBlock.removeOverhang(this.baseBlocks[this.baseBlocks.length - 1]);
       this.addSwingingBlock();
     }
 
