@@ -1,11 +1,11 @@
 class Background {
-  constructor() {
+  constructor(options) {
     this.image = new Image ();
-    this.image.src = './skyscraper_bg.jpg';
-    this.x = 0;
-    this.y = -3910;
-    this.width = 890;
-    this.height = 4477;
+    this.image.src = './space_man2.jpg';
+    this.x = options.x;
+    this.y = options.y;
+    this.width = options.width;
+    this.height = options.height;
   }
 
   draw(ctx){

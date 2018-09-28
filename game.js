@@ -3,24 +3,27 @@ const Background = require("./background");
 
 class Game {
   constructor(canvas, ctx) {
-    this.initialBlockHeight = 50;
-    this.initialBlockWidth = 350;
-    this.swingSpeed = 1.5;
+    this.canvas = canvas;
+    this.canvas.width= 1500;
+    this.canvas.height= 1000;
+    this.initialBlockHeight = 75;
+    this.initialBlockWidth = 400;
+    this.swingSpeed = 2.2;
     let baseColorValue = Math.floor(Math.random() * 361);
     const bl = new Block (
-      {x: 282, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
+      {x: this.canvas.width/2-this.initialBlockWidth/2, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
     );
     const sw = new Block (
-      {x: 282, y: 80, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: this.swingSpeed, dy: 0 }
+      {x: this.canvas.width/2-this.initialBlockWidth/2, y: 222, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: this.swingSpeed, dy: 0 }
     );
-    this.background = new Background ();
+    this.background = new Background ({x:0 ,y:-(7725-(this.canvas.height)) , width: 4700,height: 7715});
     this.baseBlocks = [bl];
     this.swingingBlock = sw;
+    this.endScrollDone = false;
     this.drop = false;
     this.collision = false;
     this.score = 0;
     this.gameOver = false;
-    this.canvas = canvas;
     this.ctx = ctx;
     this.addSwingingBlock = this.addSwingingBlock.bind(this);
     this.keyDownHandler = this.keyDownHandler.bind(this);
@@ -34,8 +37,8 @@ class Game {
     let lastWidth = this.swingingBlock.width
     this.baseBlocks.push(this.swingingBlock);
     this.swingingBlock = new Block({
-      x: 282,
-      y: 80,
+      x: this.canvas.width/2-lastWidth/2,
+      y: 222,
       width: lastWidth,
       height: this.initialBlockHeight,
       color: "hsla(" + `${newColor}` + ", 73%, 50%, 1)",
@@ -61,7 +64,7 @@ class Game {
 
   gameOverCheck(){
     let bottom = this.swingingBlock.y + this.swingingBlock.height;
-    let top = this.baseBlocks[this.baseBlocks.length - 1].y + 2;
+    let top = this.baseBlocks[this.baseBlocks.length - 1].y + 3;
     if (bottom > top) {
       this.gameOver = true;
     }
@@ -69,24 +72,38 @@ class Game {
 
 
   gameOverResize(){
-    const newHeight = this.initialBlockHeight * ((this.canvas.height/(this.score * this.initialBlockHeight)) * 0.75);
-    const yAdj = (this.baseBlocks[0].y - (this.canvas.height - this.initialBlockHeight));
+
     this.baseBlocks.forEach((bl,idx)=>{
-      bl.height = newHeight;
-      bl.y = bl.y - yAdj + ((this.initialBlockHeight - newHeight)*(idx+1));
+      bl.y -= 4;
     });
+    this.background.y -= 4;
+
   }
 
   draw(myVar){
     this.gameOverCheck();
     if (this.gameOver) {
-      if (this.score > 5) {
-        this.gameOverResize();
-        this.background.y = -3910;
-      }
       this.swingingBlock.color = "hsla(0, 0%, 0%, 0)";
-      clearInterval(myVar);
-    }
+
+        if (this.background.y > -6725 && this.endScrollDone === false) {
+          this.gameOverResize();
+        }
+
+        else {
+            this.endScrollDone = true;
+            if (this.canvas.height < this.score * this.initialBlockHeight *1.22) {
+              this.canvas.height += 2;
+              this.canvas.width += 3;
+              this.background.y += 2;
+              this.baseBlocks.forEach((bl,idx)=>{
+                bl.y += 2;
+              });
+            } else {
+              clearInterval(myVar);
+            }
+          }
+      }
+
 
 
     this.collisionCheck();
@@ -118,27 +135,28 @@ class Game {
 
     this.swingingBlock.draw(this.ctx);
 
-    if(this.swingingBlock.x + this.swingingBlock.dx > this.canvas.width-this.swingingBlock.width || this.swingingBlock.x + this.swingingBlock.dx < 0) {
+    if(this.swingingBlock.x + this.swingingBlock.dx > this.canvas.width-this.swingingBlock.width - 100|| this.swingingBlock.x + this.swingingBlock.dx < 100) {
        this.swingingBlock.dx = -this.swingingBlock.dx;
      }
 
    if (this.drop) {
      this.swingingBlock.dx = this.swingingBlock.dx*0.997;
-     this.swingingBlock.dy = 2;
+     this.swingingBlock.dy = 3;
    }
 
    this.swingingBlock.x += this.swingingBlock.dx;
    this.swingingBlock.y += this.swingingBlock.dy;
 
-   this.ctx.font = "18px Arial";
-   this.ctx.fillStyle = "black";
-   this.ctx.fillText("Score: " + this.score, 20, 30);
+   this.ctx.font = "22px Arial";
+   this.ctx.fillStyle = "red";
+   this.ctx.textAlign = "center";
+   this.ctx.fillText("Score: " + this.score, this.canvas.width/2, 40);
 
    if (this.gameOver) {
      this.ctx.font = "30px Arial";
      this.ctx.fillStyle = "red";
      this.ctx.textAlign = "center";
-     this.ctx.fillText("Game Over", this.canvas.width/2, 40);
+     this.ctx.fillText("Game Over", this.canvas.width/2, 80);
    }
 
   }
