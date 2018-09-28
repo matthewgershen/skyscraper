@@ -2,6 +2,8 @@ canvas {
   background: #eee;
   display: block;
   margin: auto;
+  height: 576px;
+  width: 864px;
 
 }
 

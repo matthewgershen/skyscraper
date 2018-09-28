@@ -1,9 +1,10 @@
 const Block = require("./block");
+const Background = require("./background");
 
 class Game {
   constructor(canvas, ctx) {
     this.initialBlockHeight = 50;
-    this.initialBlockWidth = 300;
+    this.initialBlockWidth = 350;
     this.swingSpeed = 1.5;
     let baseColorValue = Math.floor(Math.random() * 361);
     const bl = new Block (
@@ -12,6 +13,7 @@ class Game {
     const sw = new Block (
       {x: 282, y: 80, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: this.swingSpeed, dy: 0 }
     );
+    this.background = new Background ();
     this.baseBlocks = [bl];
     this.swingingBlock = sw;
     this.drop = false;
@@ -80,6 +82,7 @@ class Game {
     if (this.gameOver) {
       if (this.score > 5) {
         this.gameOverResize();
+        this.background.y = -3910;
       }
       this.swingingBlock.color = "hsla(0, 0%, 0%, 0)";
       clearInterval(myVar);
@@ -98,14 +101,21 @@ class Game {
     }
 
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.baseBlocks.forEach((bl)=>{
-      if (this.baseBlocks[this.baseBlocks.length-1].y < this.canvas.height * 0.6) {
-        bl.y += .15;
+    this.background.draw(this.ctx, this.canvas);
+
+
+    if (this.baseBlocks[this.baseBlocks.length-1].y < this.canvas.height * 0.6) {
+      this.background.y += 0.15;
+      this.baseBlocks.forEach((bl)=>{
+        bl.y += 0.15;
         bl.draw(this.ctx);
-      } else {
+      });
+    } else {
+      this.baseBlocks.forEach((bl)=>{
         bl.draw(this.ctx);
-      }
-    });
+      });
+    }
+
     this.swingingBlock.draw(this.ctx);
 
     if(this.swingingBlock.x + this.swingingBlock.dx > this.canvas.width-this.swingingBlock.width || this.swingingBlock.x + this.swingingBlock.dx < 0) {
