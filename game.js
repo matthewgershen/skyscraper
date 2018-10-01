@@ -49,6 +49,7 @@ class Game {
 
   keyDownHandler(e){
     if (e.keyCode === 32) {
+      e.preventDefault();
       this.drop = true;
     }
   }
@@ -80,7 +81,7 @@ class Game {
 
   }
 
-  draw(myVar){
+  draw(intervals){
     this.gameOverCheck();
     if (this.gameOver) {
       this.swingingBlock.color = "hsla(0, 0%, 0%, 0)";
@@ -99,7 +100,9 @@ class Game {
                 bl.y += 2;
               });
             } else {
-              clearInterval(myVar);
+              intervals.forEach((el)=>{
+                clearInterval(el);
+              });
             }
           }
       }
