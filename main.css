@@ -41,3 +41,29 @@ body{
   border-radius: 5px;
   height: 50%;
 }
+
+.contact{
+  align-items: center;
+  padding-top: 20px;
+  width: 200px;
+  margin:auto;
+  text-align: center;
+  font-weight: bold;
+}
+.icons{
+  list-style: none;
+  font-size: 26px;
+  display: flex;
+  padding: 10px; 0;
+  width: 150px;
+  margin:auto;
+}
+
+li {
+  padding: 0 10px;
+}
+
+a {
+  color:#535353;
+  text-decoration: none;
+}

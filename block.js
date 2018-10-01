@@ -5,16 +5,19 @@ class Block {
     this.width = options.width;
     this.height = options.height;
     this.color = options.color;
-    this.border = options.border;
     this.dx = options.dx;
     this.dy = options.dy;
   }
 
   draw(ctx) {
+    // var img= new Image ();
+    // img.src = './test4.png';
+    // var pat=ctx.createPattern(img,"repeat");
+
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
+    // ctx.fillStyle=pat;
     ctx.fillStyle = this.color;
-    ctx.strokeStyle = this.border
     ctx.fill();
     ctx.closePath();
   }
