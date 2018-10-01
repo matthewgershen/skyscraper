@@ -5,6 +5,7 @@ class Block {
     this.width = options.width;
     this.height = options.height;
     this.color = options.color;
+    this.border = options.border;
     this.dx = options.dx;
     this.dy = options.dy;
   }
@@ -13,6 +14,7 @@ class Block {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = this.color;
+    ctx.strokeStyle = this.border
     ctx.fill();
     ctx.closePath();
   }

@@ -11,7 +11,7 @@ class Game {
     this.swingSpeed = 2.2;
     let baseColorValue = Math.floor(Math.random() * 361);
     const bl = new Block (
-      {x: this.canvas.width/2-this.initialBlockWidth/2, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
+      {x: this.canvas.width/2-this.initialBlockWidth/2, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)",border:"hsla(" + `${baseColorValue}` +", 73%, 100%, 1)", dx: 0, dy: 0 }
     );
     const sw = new Block (
       {x: this.canvas.width/2-this.initialBlockWidth/2, y: 222, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: this.swingSpeed, dy: 0 }
@@ -147,7 +147,7 @@ class Game {
    this.swingingBlock.x += this.swingingBlock.dx;
    this.swingingBlock.y += this.swingingBlock.dy;
 
-   this.ctx.font = "22px Arial";
+   this.ctx.font = "30px Arial";
    this.ctx.fillStyle = "red";
    this.ctx.textAlign = "center";
    this.ctx.fillText("Score: " + this.score, this.canvas.width/2, 40);
