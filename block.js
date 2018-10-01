@@ -11,8 +11,10 @@ class Block {
 
   draw(ctx) {
     // var img= new Image ();
-    // img.src = './test4.png';
-    // var pat=ctx.createPattern(img,"repeat");
+    // img.src = './test2.jpg';
+    // ctx.translate(this.x,this.y)
+    // var pat=ctx.createPattern(img,'repeat');
+    // ctx.restore();
 
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
