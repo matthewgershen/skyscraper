@@ -102,6 +102,8 @@ class Game {
             } else {
               intervals.forEach((el)=>{
                 clearInterval(el);
+              document.getElementById("highScore").hidden = false;
+
               });
             }
           }

@@ -10,7 +10,7 @@ canvas {
 
 h1 {
   text-align: center;
-  margin: 75px 0 25px 0;
+  margin: 5px 0 10px 0;
   color: black;
   font-size: 46px;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
@@ -44,7 +44,7 @@ body{
 
 .contact{
   align-items: center;
-  padding-top: 20px;
+  padding-top: 10px;
   width: 200px;
   margin:auto;
   text-align: center;
@@ -54,7 +54,7 @@ body{
   list-style: none;
   font-size: 26px;
   display: flex;
-  padding: 10px; 0;
+  padding: 5px; 0;
   width: 150px;
   margin:auto;
 }
