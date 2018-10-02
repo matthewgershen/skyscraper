@@ -20,6 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     const game = new Game(canvas, ctx);
     document.addEventListener("keydown", game.keyDownHandler, false)
-    intervals.push(setInterval(() => game.draw(intervals), 5));
+    intervals.push(setInterval(() => game.draw(intervals), 16));
   });
 });

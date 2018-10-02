@@ -8,7 +8,7 @@ class Game {
     this.canvas.height= 1000;
     this.initialBlockHeight = 75;
     this.initialBlockWidth = 400;
-    this.swingSpeed = 2.2;
+    this.swingSpeed = 7;
     this.colors = {
       1:"hsla(289, 60%, 15%,1)",
       2:"hsla(185, 59%, 55%,1)",
@@ -71,7 +71,7 @@ class Game {
 
   gameOverCheck(){
     let bottom = this.swingingBlock.y + this.swingingBlock.height;
-    let top = this.baseBlocks[this.baseBlocks.length - 1].y + 3;
+    let top = this.baseBlocks[this.baseBlocks.length - 1].y + 11;
     if (bottom > top) {
       this.gameOver = true;
     }
@@ -88,6 +88,7 @@ class Game {
   }
 
   draw(intervals){
+
     this.gameOverCheck();
     if (this.gameOver) {
       this.swingingBlock.color = "hsla(0, 0%, 0%, 0)";
@@ -99,11 +100,11 @@ class Game {
         else {
             this.endScrollDone = true;
             if (this.canvas.height < this.score * this.initialBlockHeight *1.22) {
-              this.canvas.height += 2;
-              this.canvas.width += 3;
-              this.background.y += 2;
+              this.canvas.height += 4;
+              this.canvas.width += 6;
+              this.background.y += 4;
               this.baseBlocks.forEach((bl,idx)=>{
-                bl.y += 2;
+                bl.y += 4;
               });
             } else {
               intervals.forEach((el)=>{
@@ -133,9 +134,9 @@ class Game {
 
 
     if (this.baseBlocks[this.baseBlocks.length-1].y < this.canvas.height * 0.6) {
-      this.background.y += 0.15;
+      this.background.y += 1;
       this.baseBlocks.forEach((bl)=>{
-        bl.y += 0.15;
+        bl.y += 1;
         bl.draw(this.ctx);
       });
     } else {
@@ -151,8 +152,8 @@ class Game {
      }
 
    if (this.drop) {
-     this.swingingBlock.dx = this.swingingBlock.dx*0.997;
-     this.swingingBlock.dy = 3;
+     this.swingingBlock.dx = this.swingingBlock.dx*0.992;
+     this.swingingBlock.dy = 10;
    }
 
    this.swingingBlock.x += this.swingingBlock.dx;
