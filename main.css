@@ -4,11 +4,13 @@ canvas {
   margin: 0 20px 0 20px;
   height: 576px;
   width: 864px;
-  border-radius: 5px;
+  border: 1px solid white;
+  /* border-radius: 5px; */
 
 }
 
 h1 {
+  font-family: 'Orbitron', sans-serif;
   text-align: center;
   margin: 5px 0 10px 0;
   color: black;
@@ -18,34 +20,42 @@ h1 {
 
 body{
   background-color: #dbe5db;
-  background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%2350a2ff' fill-opacity='0.78'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url(./newbg.jpg);
+  background-position: 50%;
+  /* background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%2350a2ff' fill-opacity='0.78'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); */
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  vertical-align: middle;
 }
 
 .scores{
-  width: 300px;
+  font-family: 'Share Tech Mono', monospace;
+  width: 222px;
   text-align: center;
-  background: white;
-  border-radius: 5px;
+  background: rgba(169, 169, 169, 0.65);
+  /* border-radius: 5px; */
   height: 50%;
+  /* background-image: url(./scoreboard.jpg); */
 }
 .inst{
-  width: 300px;
+  font-family: 'Share Tech Mono', monospace;
+  width: 222px;
   text-align: center;
-  background: rgba(169, 169, 169, 0.85);
-  border-radius: 5px;
+  background: rgba(169, 169, 169, 0.65);
+  /* border-radius: 5px; */
   height: 50%;
 }
 
 .contact{
+  font-family: 'Orbitron', sans-serif;
+  color: white;
   align-items: center;
   padding-top: 10px;
-  width: 200px;
+  width: 250px;
   margin:auto;
   text-align: center;
   font-weight: bold;
@@ -69,9 +79,10 @@ a {
 }
 
 button {
-  background: #f06dd3;
-  border: 1px solid white;
-  border-radius: 5px;
+  font-family: 'Share Tech Mono', monospace;
+  background: #240f5b;
+  border: 1px solid transparent;
+  /* border-radius: 5px; */
   font-size: 24px;
   margin-bottom: 10px;
   color: white;
@@ -80,4 +91,45 @@ button {
 
 button:hover{
   cursor: pointer;
+}
+
+#scoreBoard{
+  list-style: none;
+  width: 90%;
+  margin: auto;
+  padding: 0 0 18px 0;
+}
+
+#scoreBoard li {
+  display: flex;
+  justify-content: space-between;
+}
+
+#highScore{
+  font-family: 'Share Tech Mono', monospace;
+  text-align: center;
+  z-index: 2;
+  margin: auto;
+  background: rgba(169, 169, 169, 0.65);
+  width: 175px;
+  position: absolute;
+  top: 100px;
+  right: 550px;
+  padding: 5px 0;
+}
+
+#highScore #name {
+  font-family: 'Share Tech Mono', monospace;
+  margin: 5px 0;
+  text-align: center;
+  width: 30px;
+}
+#highScore #submit {
+  font-family: 'Share Tech Mono', monospace;
+  margin: 5px 0;
+  text-align: center;
+  background: #240f5b;
+  color: white;
+  border: 1px solid transparent;
+  font-weight: 500;
 }

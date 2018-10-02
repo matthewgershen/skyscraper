@@ -10,9 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const game = new Game(canvas, ctx);
   const intervals =[]
   document.addEventListener("keydown", game.keyDownHandler, false)
-  intervals.push(setInterval(() => game.draw(intervals), 5));
+  intervals.push(setInterval(() => game.draw(intervals), 16));
 
   restart.addEventListener("click", (e)=>{
+    document.getElementById("highScore").hidden = true;
     document.getElementsByClassName("wrapper")[0].focus();
     intervals.forEach((el)=>{
       clearInterval(el);

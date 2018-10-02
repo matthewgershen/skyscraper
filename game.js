@@ -9,12 +9,18 @@ class Game {
     this.initialBlockHeight = 75;
     this.initialBlockWidth = 400;
     this.swingSpeed = 2.2;
-    let baseColorValue = Math.floor(Math.random() * 361);
+    this.colors = {
+      1:"hsla(289, 60%, 15%,1)",
+      2:"hsla(185, 59%, 55%,1)",
+      3:"hsla(358, 51%, 60%,1)",
+      4:"hsla(238, 48%, 31%,1)",
+      5:"hsla(216, 57%, 55%,1)"};
+    let baseColorValue = Math.floor(Math.random() * 5) + 1;
     const bl = new Block (
-      {x: this.canvas.width/2-this.initialBlockWidth/2, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue}` +", 73%, 50%, 1)", dx: 0, dy: 0 }
+      {x: this.canvas.width/2-this.initialBlockWidth/2, y: canvas.height - this.initialBlockHeight, width: this.initialBlockWidth, height: this.initialBlockHeight, color:this.colors[baseColorValue], dx: 0, dy: 0 }
     );
     const sw = new Block (
-      {x: this.canvas.width/2-this.initialBlockWidth/2, y: 222, width: this.initialBlockWidth, height: this.initialBlockHeight, color:"hsla(" + `${baseColorValue + 4}` +", 73%, 50%, 1)", dx: this.swingSpeed, dy: 0 }
+      {x: this.canvas.width/2-this.initialBlockWidth/2, y: 222, width: this.initialBlockWidth, height: this.initialBlockHeight, color:this.colors[baseColorValue], dx: this.swingSpeed, dy: 0 }
     );
     this.background = new Background ({x:0 ,y:-(7725-(this.canvas.height)) , width: 4700,height: 7715});
     this.baseBlocks = [bl];
@@ -41,7 +47,7 @@ class Game {
       y: 222,
       width: lastWidth,
       height: this.initialBlockHeight,
-      color: "hsla(" + `${newColor}` + ", 73%, 50%, 1)",
+      color: newColor,
       dx: this.swingSpeed,
       dy: 0
     });

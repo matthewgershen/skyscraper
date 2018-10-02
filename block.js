@@ -10,26 +10,21 @@ class Block {
   }
 
   draw(ctx) {
-    // var img= new Image ();
-    // img.src = './test2.jpg';
-    // ctx.translate(this.x,this.y)
-    // var pat=ctx.createPattern(img,'repeat');
-    // ctx.restore();
-
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
-    // ctx.fillStyle=pat;
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
   }
 
   incrementColor(){
-    let end = this.color.indexOf(",");
-    let colorValue = parseInt(this.color.slice(5,end));
+    let idx = this.color.indexOf(",");
+    let colorValue = parseInt(this.color.slice(5,idx));
+    let beginning = this.color.slice(0,5);
+    let end = this.color.slice(idx,this.color.length)
     colorValue += 4;
     colorValue = (colorValue % 360);
-    return colorValue;
+    return beginning + colorValue + end;
   }
 
   removeOverhang(baseBlock){
