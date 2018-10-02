@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("keydown", game.keyDownHandler, false)
   intervals.push(setInterval(() => game.draw(intervals), 5));
 
-
   restart.addEventListener("click", (e)=>{
     document.getElementsByClassName("wrapper")[0].focus();
     intervals.forEach((el)=>{

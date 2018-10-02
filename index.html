@@ -3,8 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <title>Skyscraper</title>
-    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCKilNp4k2guFGZ8cSIY5QNLJygGMxUgLw",
+        authDomain: "skyscraper-7c839.firebaseapp.com",
+        databaseURL: "https://skyscraper-7c839.firebaseio.com",
+        projectId: "skyscraper-7c839",
+        storageBucket: "skyscraper-7c839.appspot.com",
+        messagingSenderId: "844140986915"
+      };
+      firebase.initializeApp(config);
+      function saveScore(){
+        let newScore = {};
+        newScore.name = document.getElementById("name").value;
+        newScore.score = -parseInt(window.score);
+        firebase.database().ref('scores/').push(newScore);
+      }
+
+      const getScores = firebase.database().ref('scores/')
+      .orderByChild("score").limitToFirst(10);
+      getScores.on('child_added', (snapshot) => {
+        childScore = snapshot.val();
+        let scoreBoard = document.getElementById("scoreBoard");
+        scoreBoard.innerHTML += `<li>${childScore.name.toUpperCase()} ${-childScore.score}</li>`;
+      });
+    </script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="main.css" rel="stylesheet" type="text/css">
 </head>
@@ -13,7 +38,9 @@
 <h1>Skyscraper</h1>
 <div class="wrapper">
   <div class="scores">
-    <!-- <h3>High Scores</h3> -->
+    <h3>High Scores</h3>
+    <ul id="scoreBoard">
+    </ul>
   </div>
   <canvas id="myCanvas" ></canvas>
   <div class="inst">
@@ -25,9 +52,9 @@
 <div id="highScore" hidden> Submit your score!
   <form class="" action="index.html" method="post">
     <label>Name
-      <input type="text" name="" value="">
+      <input id= "name" type="text" name="" placeholder="AAA">
     </label>
-    <input type="submit" name="" value="Submit">
+    <input type="button" onClick="saveScore()" value="Submit">
   </form>
 </div>
 <div class="contact">
