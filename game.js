@@ -22,7 +22,7 @@ class Game {
     const sw = new Block (
       {x: this.canvas.width/2-this.initialBlockWidth/2, y: 222, width: this.initialBlockWidth, height: this.initialBlockHeight, color:this.colors[baseColorValue], dx: this.swingSpeed, dy: 0 }
     );
-    this.background = new Background ({x:0 ,y:-(7725-(this.canvas.height)) , width: 4700,height: 7715});
+    this.background = new Background ({x:0 ,y:-(7715-(this.canvas.height)) , width: 6750,height: 7715});
     this.baseBlocks = [bl];
     this.swingingBlock = sw;
     this.endScrollDone = false;
@@ -81,9 +81,9 @@ class Game {
   gameOverResize(){
 
     this.baseBlocks.forEach((bl,idx)=>{
-      bl.y -= 4;
+      bl.y -= 8;
     });
-    this.background.y -= 4;
+    this.background.y -= 8;
 
   }
 
@@ -99,12 +99,12 @@ class Game {
 
         else {
             this.endScrollDone = true;
-            if (this.canvas.height < this.score * this.initialBlockHeight *1.22) {
-              this.canvas.height += 4;
-              this.canvas.width += 6;
-              this.background.y += 4;
+            if (this.canvas.height < this.score * this.initialBlockHeight *1.15) {
+              this.canvas.height += 8;
+              this.canvas.width += 12;
+              this.background.y += 8;
               this.baseBlocks.forEach((bl,idx)=>{
-                bl.y += 4;
+                bl.y += 8;
               });
             } else {
               intervals.forEach((el)=>{

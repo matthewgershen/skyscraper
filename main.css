@@ -47,7 +47,7 @@ body{
 
 .contact{
   font-family: 'Orbitron', sans-serif;
-  color: white;
+  color: black;
   align-items: center;
   padding-top: 10px;
   width: 250px;
@@ -69,8 +69,12 @@ li {
 }
 
 a {
-  color:#ffffff;
+  color: black;
   text-decoration: none;
+}
+
+a:hover{
+  color: #3d3d3d;
 }
 
 button {

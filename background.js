@@ -1,7 +1,7 @@
 class Background {
   constructor(options) {
     this.image = new Image ();
-    this.image.src = './space_man2.jpg';
+    this.image.src = './space_man3.jpg';
     this.x = options.x;
     this.y = options.y;
     this.width = options.width;
