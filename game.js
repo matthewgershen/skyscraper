@@ -93,7 +93,7 @@ class Game {
     if (this.gameOver) {
       this.swingingBlock.color = "hsla(0, 0%, 0%, 0)";
 
-        if (this.background.y > -6725 && this.endScrollDone === false) {
+        if (this.background.y > -6715 && this.endScrollDone === false) {
           this.gameOverResize();
         }
 
