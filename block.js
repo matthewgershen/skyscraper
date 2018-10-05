@@ -1,5 +1,7 @@
 class Block {
   constructor(options) {
+    // this.img = new Image();
+    // this.img.src = './hmm.png';
     this.x = options.x;
     this.y = options.y;
     this.width = options.width;
@@ -10,6 +12,7 @@ class Block {
   }
 
   draw(ctx) {
+    // ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = this.color;
