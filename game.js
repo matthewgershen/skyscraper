@@ -7,7 +7,7 @@ class Game {
     this.canvas.width= 1500;
     this.canvas.height= 1000;
     this.initialBlockHeight = 75;
-    this.initialBlockWidth = 400;
+    this.initialBlockWidth = 1000;
     this.swingSpeed = 7;
     this.colors = {
       1:"hsla(289, 60%, 15%,1)",
@@ -39,7 +39,7 @@ class Game {
   }
 
   addSwingingBlock() {
-    let newColor = this.swingingBlock.incrementColor();
+    // let newColor = this.swingingBlock.incrementColor();
     let lastWidth = this.swingingBlock.width
     this.baseBlocks.push(this.swingingBlock);
     this.swingingBlock = new Block({
@@ -47,7 +47,7 @@ class Game {
       y: 222,
       width: lastWidth,
       height: this.initialBlockHeight,
-      color: newColor,
+      // color: newColor,
       dx: this.swingSpeed,
       dy: 0
     });
@@ -159,16 +159,16 @@ class Game {
    this.swingingBlock.x += this.swingingBlock.dx;
    this.swingingBlock.y += this.swingingBlock.dy;
 
-   this.ctx.font = "30px Arial";
+   this.ctx.font = `${this.canvas.height/33.33}px Arial`;
    this.ctx.fillStyle = "red";
    this.ctx.textAlign = "center";
-   this.ctx.fillText("Score: " + this.score, this.canvas.width/2, 40);
+   this.ctx.fillText("Score: " + this.score, this.canvas.width/2, this.canvas.height/32);
 
    if (this.gameOver) {
-     this.ctx.font = "30px Arial";
+     this.ctx.font = `${this.canvas.height/33.33}px Arial`;
      this.ctx.fillStyle = "red";
      this.ctx.textAlign = "center";
-     this.ctx.fillText("Game Over", this.canvas.width/2, 80);
+     this.ctx.fillText("Game Over", this.canvas.width/2, this.canvas.height/16);
    }
 
   }
