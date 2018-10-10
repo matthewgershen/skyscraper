@@ -112,7 +112,7 @@ button:hover{
   width: 175px;
   position: absolute;
   top: 100px;
-  right: 550px;
+  right: 400px;
   padding: 5px 0;
 }
 
@@ -130,4 +130,11 @@ button:hover{
   color: white;
   border: 1px solid transparent;
   font-weight: 500;
+}
+
+strong{
+  text-transform: uppercase;
+  background-color: rgba(36,15,91,.65);
+  color: white;
+
 }
