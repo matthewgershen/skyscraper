@@ -2,7 +2,7 @@ const Block = require("./block");
 const Game = require("./game");
 
 
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = function(){
   const canvas = document.getElementById("myCanvas");
   const ctx = canvas.getContext("2d");
   const restart = document.getElementById("restart");
@@ -22,4 +22,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", game.keyDownHandler, false)
     intervals.push(setInterval(() => game.draw(intervals), 16));
   });
-});
+};

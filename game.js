@@ -82,7 +82,7 @@ class Game {
 
     this.gameOverCheck();
     if (this.gameOver) {
-      this.swingingBlock.img.src = "./transparent.png";
+      this.swingingBlock.img.src = "./images/transparent.png";
 
         if (this.background.y > -6715 && this.endScrollDone === false) {
           this.gameOverResize();
