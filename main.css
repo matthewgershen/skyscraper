@@ -110,9 +110,9 @@ button:hover{
   margin: auto;
   background: rgba(169, 169, 169, 0.65);
   width: 175px;
-  position: absolute;
-  top: 100px;
-  right: 400px;
+  position: relative;
+  top: -594px;
+  right: -281px;
   padding: 5px 0;
 }
 
