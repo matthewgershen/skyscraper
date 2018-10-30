@@ -13,6 +13,6 @@ Skyscraper is a game inspired by the gameplay of [Stack](https://www.youtube.com
 
 ### Architecture and Technologies
 
-JavaScript for game logic
-Canvas for game art
-Google Firebase for high scores
+* JavaScript for game logic
+* Canvas for game art
+* Google Firebase for high scores
