@@ -111,6 +111,7 @@ class Game {
 
     this.collisionCheck();
     if (this.collision) {
+      document.getElementById("background_audio").play();
       this.score += 1;
       this.drop = false;
       this.swingingBlock.dx = 0;
